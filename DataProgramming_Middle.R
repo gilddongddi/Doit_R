@@ -105,17 +105,23 @@ write.table(winedata, "wine.txt", sep=",")
 
 lgm <- function(x,y){
   i <- abs(x-y)
-  if(x%%i==0 && y%%i==0)
-    return(i)
-  else
-    x%%i==0
-
+  while(i!=0){
+    if(x%%i==0 && y%%i==0){
+      return(i)
+      break
+    }
+    i <- i-1
+  }
 }
 
-lgm <- function(x,y)
-  
-
-lgm(3,9)
+result <- lgm(10,8)  
+result
+result <- lgm(10,20)
+result
+result <- lgm(12,9)
+result
+result <- lgm(12,4)
+result
 lgm(7,21)
 lgm(42, 54)
 lgm(91, 119)
@@ -125,13 +131,43 @@ lgm(91, 119)
 # PricePerCt(캐럿당 가격) 열을 이용하여 다음을 수행하시오.
 install.packages("Stat2Data")
 library(Stat2Data)
-dim(diamonds)
-str(diamonds)
-colnames(diamonds)
+data(Diamonds)
+dim(Diamonds)
+str(Diamonds)
+colnames(Diamonds)
 
 # 01) PricePerCt(캐럿당 가격)의 평균, 중앙값, 표준편차를 각각 구하고 의미를 설명하시오.
-
+mean(Diamonds$PricePerCt)
+median(Diamonds$PricePerCt)
+sd(Diamonds$PricePerCt)
 
 # 02) PricePerCt(캐럿당 가격)의 히스토그램, 상자그림을 작성하고 의미를 설명하시오.  
 # 단, 히스토그램 X축 제목은 ‘캐럿당 가격($), Y축 제목은 ’빈도수‘, 
 # 가장 빈도가 높은 막대에는 다른 색을 지정하시 오. 
+color <- rep("pink",times=20)
+color[5] <- "hotpink"
+hist(Diamonds$PricePerCt,
+     main = "Price Per Carat",
+     xlab = "PricePerCt($)",
+     ylab = "Friquency",
+     col = color,
+     breaks = seq(0,20000,1000))
+
+summary(Diamonds$PricePerCt)
+
+boxplot(Diamonds$PricePerCt,
+        col = "yellow",
+        horizontal = F,
+        main = "Price Per Carat",
+        ylab = "PricePerCt($)",
+        ylim = range(1:20000))
+
+
+outlier <- Diamonds$PricePerCt >= 7762
+sum(outlier)
+sum(Diamonds$PricePerCt)
+
+Q1_3 <- Diamonds$PricePerCt >= 4185 
+sum(Q1_3)
+Q1_3 <- Q1_3 <= 7762
+sum(Q1_3)
