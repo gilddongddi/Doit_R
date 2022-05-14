@@ -171,3 +171,8 @@ Q1_3 <- Diamonds$PricePerCt >= 4185
 sum(Q1_3)
 Q1_3 <- Q1_3 <= 7762
 sum(Q1_3)
+
+var(Diamonds$PricePerCt)
+sd(Diamonds$PricePerCt)
+quantile(Diamonds$PricePerCt)
+stem(Diamonds$PricePerCt, scale=1)
